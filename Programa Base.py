@@ -1,3 +1,5 @@
+import queue
+
 #clases
 class Cliente:
     def __init__(self, Nombre, Direccion, Descuento = 0):
@@ -9,12 +11,15 @@ class Cliente:
     def VerCliente(self):
         print(f"------{self.Nombre}------")
         print(f"Direccion: {self.Direccion}")
-        print("\nPedidos Anteriores:")
-        for i in self.PedidosAnteriores:
-            print(i)
-        print("\nPedidos Pendientes:")
-        for i in self.PedidosPendientes:
-            print(i)
+        
+        if len(self.PedidosAnteriores) != 0:
+            print("\nPedidos Anteriores:")
+            for i in self.PedidosAnteriores:
+                print(i)
+        if len(self.PedidosPendientes) != 0:
+            print("\nPedidos Pendientes:")
+            for i in self.PedidosPendientes:
+                print(i)
 
 class Receta:
     def __init__(self, Nombre_Platillo, Ingredientes, Procedimiento):
