@@ -35,18 +35,29 @@ class Receta:
         print(f"\nProcedimiento:")
         print(self.Procedimiento)
 
-class Pedidos:
-    def __init__(self, Cliente, NombreEvento, Direccion, RecetaUtilizar, CantidadPersonas, FechaEvento):
+class PedidoSimple:
+    def __init__(self, Cliente, Direccion, RecetasUtilizar, CantidadPlatillos, Fecha):
         self.Cliente = Cliente
-        self.Nombre = NombreEvento
         self.Direccion = Direccion
-        self.RecetaUtilizar = RecetaUtilizar
-        self.CantidadPersonas = CantidadPersonas
-        self.Fecha = FechaEvento
+        self.RecetasUtilizar = RecetasUtilizar
+        self.CantidadPlatillos = CantidadPlatillos
+        self.Fecha = Fecha
         self.SubTotal = 0
         self.Total = 0
+    
+    def MostrarPedido(self):
+        print
+
     def PedidoEntregado(self):
-        return {"Codigo" : self.Codigo, "Cliente": self.Cliente, "Fecha": self.Fecha, "Receta Utilizada" : self.RecetaUtilizar}
+        return {"Cliente": self.Cliente, 
+                "Fecha": self.Fecha, 
+                "Receta Utilizada" : self.RecetasUtilizar}
+
+class Evento(PedidoSimple):
+    def __init__(self, Cliente, Direccion, RecetasUtilizar, CantidadPlatillos, Fecha, NombreEvento):
+        super().__init__(Cliente, Direccion, RecetasUtilizar, CantidadPlatillos, Fecha)
+        self.NombreEvento = NombreEvento
+
 
 #Funciones
 
