@@ -1,5 +1,3 @@
-import queue
-
 #clases
 class Cliente:
     def __init__(self, Nombre, Direccion, Descuento = 0):
@@ -22,35 +20,35 @@ class Cliente:
                 print(i)
 
 class Receta:
-    def __init__(self, Nombre_Platillo, Ingredientes, Procedimiento):
+    def __init__(self, Nombre_Platillo, Ingredientes, Procedimiento, PrecioPorcion):
         self.Nombre_Platillo = Nombre_Platillo
         self.Ingredientes = Ingredientes
         self.Procedimiento = Procedimiento
+        self.Precio = PrecioPorcion
     def MostrarReceta(self):
         print(f"-----{self.Nombre_Platillo}-----")
+        print(f"Precio: {self.Precio}")
         print("Ingredientes:")
         for i in self.Ingredientes:
-            print(i)
+            for n, c in i.items():
+                print(f"Nombre: {n}    Cantidad: {c}")
         print(f"\nProcedimiento:")
         print(self.Procedimiento)
 
 class Pedidos:
-    def __init__(self, Cliente, RecetaUtilizar, Codigo, FechaEvento):
+    def __init__(self, Cliente, NombreEvento, Direccion, RecetaUtilizar, CantidadPersonas, FechaEvento):
         self.Cliente = Cliente
+        self.Nombre = NombreEvento
+        self.Direccion = Direccion
         self.RecetaUtilizar = RecetaUtilizar
-        self.Codigo = Codigo
+        self.CantidadPersonas = CantidadPersonas
         self.Fecha = FechaEvento
+        self.SubTotal = 0
+        self.Total = 0
     def PedidoEntregado(self):
         return {"Codigo" : self.Codigo, "Cliente": self.Cliente, "Fecha": self.Fecha, "Receta Utilizada" : self.RecetaUtilizar}
 
 #Funciones
-def NuevoCliente(Name, Direction, Lista):
-    Nueva = Cliente(Name, Direction)
-    Lista.append(Nueva)
-
-def NuevaReceta(Nombre, Ingredientes, Procedimiento, Lista):
-    Nueva = Receta(Nombre, Ingredientes, Procedimiento)
-    Lista.append(Nueva)
 
 def TryCatchInt(ListaOpciones, Texto):
     while True:
@@ -77,6 +75,18 @@ def TryCatchString(Texto, Lista=None):
             return Ingresar
         print("Ingrese un valor valido")
 
+def OrdenarClientes(Lista):
+    if len(Lista) <= 1:
+        return Lista
+    
+    pivote = Lista[len(Lista)//2].Nombre
+
+    Menores = [cliente for cliente in Lista if cliente.Nombre < pivote]
+    Iguales = [cliente for cliente in Lista if cliente.Nombre == pivote]
+    Mayores = [cliente for cliente in Lista if cliente.Nombre > pivote]
+
+    return OrdenarClientes(Menores) + Iguales + OrdenarClientes(Mayores)
+
 #estructura de datos
 ListaClientes = []
 ListaRecetas = []
@@ -84,7 +94,6 @@ ListaPedidosPendientes = []
 ListaPedidosRealizados = []
 
 ListaMonetaria = []
-
 
 #Funcionamiento del sistema
 
@@ -101,6 +110,28 @@ def AgregarCliente():
 
     NewCliente = Cliente(Name, Direction, Descuento)
     ListaClientes.append(NewCliente)
+
+def AgregarReceta():
+    Ingredientes = []
+    Nombre = TryCatchString("Agregue el nombre del platillo:")
+
+    while True:
+        ingrediente = TryCatchString("Agregue un ingrediente (para terminar escriba fin):")
+
+        if ingrediente == "Fin":
+            break
+        else: pass
+
+        Cantidad = input("Ingrese la cantidad de este ingrediente por porcion:")
+        
+        Ingredientes.append({ingrediente : Cantidad})
+    
+    Preparacion = TryCatchString("Escriba la preparacion de la receta: ")
+
+    Precio = TryCatchString("Ingrese el precio del platillo")
+
+    NuevaReceta = Receta(Nombre, Ingredientes, Preparacion, Precio)
+    ListaRecetas.append(NuevaReceta)
 
 print("Sistema")
 
