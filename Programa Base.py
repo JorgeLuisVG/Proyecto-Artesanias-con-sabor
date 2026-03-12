@@ -121,6 +121,18 @@ def OrdenarClientes(Lista):
 
     return OrdenarClientes(Menores) + Iguales + OrdenarClientes(Mayores)
 
+def OrdenarRecetas(Lista):
+    if len(Lista) <= 1:
+        return Lista
+    
+    pivote = Lista[len(Lista)//2].Nombre_Platillo
+
+    Menores = [Rec for Rec in Lista if Rec.Nombre_Platillo < pivote]
+    Iguales = [Rec for Rec in Lista if Rec.Nombre_Platillo == pivote]
+    Mayores = [Rec for Rec in Lista if Rec.Nombre_Platillo > pivote]
+
+    return OrdenarRecetas(Menores) + Iguales + OrdenarRecetas(Mayores)
+
 #estructura de datos
 ListaClientes = []
 ListaRecetas = []
