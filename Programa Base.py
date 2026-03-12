@@ -180,6 +180,59 @@ def AgregarReceta():
     NuevaReceta = Receta(Nombre, Ingredientes, Preparacion, Precio)
     ListaRecetas.append(NuevaReceta)
 
+def AgregarPedido():
+    def SeleccionarCliente():
+        CR = TryCatchInt([1,2], "El cliente es cliente regular? (1 = si, 2 = no)")
+        if CR == 1:
+            VerClienteBitacora()
+            NumCliente = TryCatchInt([n + 1 for n in range(len(ListaClientes)+1)], "Seleccione el cliente: ")
+            r = 1
+            for c in ListaClientes:
+                if NumCliente == r:
+                    return c
+                else: r += 1
+        else:
+            Nuev = TryCatchInt([1,2], "Desea agregar al nuevo cliente como un cliente regular? (1 = si, 2 = no)")
+            if Nuev == 1:
+                AgregarCliente()
+            else:
+                Name = TryCatchString("Ingrese el nombre del cliente: ", None)
+                Direction = TryCatchString("Ingrese la dirección del cliente: ", None)
+                Telefono = TryCatchInt([Cell for Cell in range(10000000, 100000000, 1)],"Ingrese el numero de telefono")
+                Descp = TryCatchInt([1,2], "Tiene un descuento? (1 = si, 2 = no)")
+
+                if Descp == 2:
+                    Descuento = 0
+                else:
+                    Descuento = TryCatchInt([i for i in range(1, 100)], "Ingrese el descuento del cliente")
+                    Descuento = Descuento /100
+                NewCliente = Cliente(Name, Direction, Telefono, Descuento)
+                return NewCliente
+            
+    def AgregarPedidoSimple():
+        print("Iniciando nuevo pedido")
+        Clie = SeleccionarCliente()
+        print("Seleccione la forma de entregar el producto")
+        DEP = TryCatchInt([1,2,3], "1 = El cliente pasa por su pedido \n2 = El pedido se entrega en la direccion del Cliente \n3 = El pedido se entrega en otra direccion \n")
+        if DEP == 1:
+            Direction = "Recoje su pedido"
+        elif DEP == 2:
+            Direction = Clie.Direccion
+        elif DEP == 3:
+            Direction = TryCatchString("Ingrese la direccion donde se entregará el pedido")
+
+            
+    def AgregarEvento():
+        NameEvento = TryCatchString("Ingrese el nombre del evento")
+
+    
+    print("Seleccione el tipo de pedido")
+    Tipo = TryCatchInt([1, 2], "1  = Pedido simple \n2 = Evento \n")
+
+    if Tipo == 1:
+        AgregarPedidoSimple()
+    else: AgregarEvento()
+
 print("Sistema")
 
 print("Seleccione una opcion: ")
