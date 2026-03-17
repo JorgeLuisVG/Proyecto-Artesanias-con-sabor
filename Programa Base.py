@@ -143,7 +143,7 @@ def VerBitacora(Lista):
         n += 1
 
 def ElegirClienteRecurrente():
-    VerClienteBitacora()
+    VerBitacora(ListaClientes)
     NumCliente = TryCatchInt([n + 1 for n in range(len(ListaClientes)+1)], "Seleccione el cliente escribiendo el numero asociado: ")
     r = 1
     for c in ListaClientes:
