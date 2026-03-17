@@ -133,16 +133,13 @@ def OrdenarRecetas(Lista):
 
     return OrdenarRecetas(Menores) + Iguales + OrdenarRecetas(Mayores)
 
-def VerClienteBitacora():
+def VerBitacora(Lista):
     n = 1
-    for Client in ListaClientes:
-        print(f"{n}  -  {Client.Nombre}")
-        n += 1
-
-def VerRecetaBitacora():
-    n = 1
-    for Rec in ListaRecetas:
-        print(f"{n}   -   {Rec.Nombre_Platillo}")
+    for Elemento in Lista:
+        if Lista == ListaClientes:
+            print(f"{n}  -  {Elemento.Nombre}")
+        elif Lista == ListaRecetas:
+            print(f"{n}   -   {Elemento.Nombre_Platillo}")
         n += 1
 
 def ElegirClienteRecurrente():
