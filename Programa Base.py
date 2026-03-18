@@ -235,7 +235,24 @@ def AgregarPedido():
         elif DEP == 3:
             Direction = TryCatchString("Ingrese la direccion donde se entregará el pedido")
 
+        ListaRUtilizar = []
         VerBitacora(ListaRecetas)
+        while True:
+            Receta = TryCatchString("Seleccione la receta desceada escribiendo el numero asociado", [str(n + 1) for n in range(len(ListaClientes)+1)])
+            
+            r = 1
+            for R in ListaRecetas:
+                if Receta == r:
+                    ListaRUtilizar.append(R)
+
+            if 1!=1: break
+
+        NumCliente = TryCatchInt([n + 1 for n in range(len(ListaClientes)+1)], "Seleccione el cliente escribiendo el numero asociado: ")
+        r = 1
+        for c in ListaClientes:
+            if NumCliente == r:
+                return c
+            else: r += 1
         
 
 
