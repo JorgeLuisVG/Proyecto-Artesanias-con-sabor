@@ -244,8 +244,13 @@ def AgregarPedido():
             for R in ListaRecetas:
                 if Receta == r:
                     ListaRUtilizar.append(R)
-
-            if 1!=1: break
+                    break
+                r += 1
+            
+            Continuar = TryCatchInt([1,2], "Desea ingresar otra receta para este pedido? (1 = si, 2 = no)")
+            if Continuar == 2:
+                break
+            else: pass
 
         NumCliente = TryCatchInt([n + 1 for n in range(len(ListaClientes)+1)], "Seleccione el cliente escribiendo el numero asociado: ")
         r = 1
@@ -253,13 +258,6 @@ def AgregarPedido():
             if NumCliente == r:
                 return c
             else: r += 1
-        
-
-
-
-
-
-
 
     def AgregarEvento():
         NameEvento = TryCatchString("Ingrese el nombre del evento")
