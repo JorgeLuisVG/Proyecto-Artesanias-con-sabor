@@ -1,4 +1,4 @@
-#clases
+3#clases
 class Cliente:
     def __init__(self, Nombre, Direccion, NumeroTelefono, Descuento = 0):
         self.Nombre = Nombre
