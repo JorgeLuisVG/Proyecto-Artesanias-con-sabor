@@ -200,7 +200,6 @@ def AgregarReceta():
     NuevaReceta = Receta(Nombre, Ingredientes, Preparacion, Precio)
     ListaRecetas.append(NuevaReceta)
 
-
 def AgregarPedido():
     def SeleccionarCliente():
         CR = TryCatchInt([1, 2], "El cliente es cliente regular? (1 = si, 2 = no): ")
@@ -253,7 +252,8 @@ def AgregarPedido():
             if Continuar == 2:
                 break
             else: pass
-
+ 
+        VerBitacora(ListaClientes)
         NumCliente = TryCatchInt([n + 1 for n in range(len(ListaClientes)+1)], "Seleccione el cliente escribiendo el numero asociado: ")
         r = 1
         for c in ListaClientes:
