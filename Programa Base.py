@@ -1,5 +1,9 @@
 import sqlite3
 
+from database import crearTablas
+
+crearTablas()
+
 #clases
 class Cliente:
     def __init__(self, Nombre, Direccion, NumeroTelefono, Descuento = 0):
