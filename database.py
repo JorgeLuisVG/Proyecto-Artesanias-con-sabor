@@ -1,13 +1,13 @@
 import sqlite3
 
 def conectar():
-    return slite3.connect("artesanias.db")
+    return sqlite3.connect("artesanias.db")
 
 def crearTablas():
     con = conectar()
     cur = con.cursor()
 
-    cur.excecutescript("""
+    cur.execute("""
     CREATE TABLE IF NOT EXISTS clientes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre TEXT NOT NULL, 
@@ -16,7 +16,7 @@ def crearTablas():
     );
 
     CREATE TABLE IF NOT EXISTS recetas (
-    id INTEGER PRIMARY LEY AUTOINCREMENT, 
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
     nombrePlatillo TEXT NOT NULL,
     procedimiento TEXT, 
     precio REAL NOT NULL
